@@ -2,13 +2,13 @@ from PIL import Image
 import os
 
 
-imagesDirectory= r"C:\Desktop\UAV水体数据集\unlabel_images\最新最新\img"  # tiff图片所在文件夹路径
+imagesDirectory= r"C:\Desktop\水体\label_翻转"  # tiff图片所在文件夹路径
 distDirectory = os.path.dirname(imagesDirectory)
-distDirectory = os.path.join(distDirectory, "pngimage")# 要存放png格式的文件夹路径
+distDirectory = os.path.join(distDirectory, "标记_png")# 要存放png格式的文件夹路径
 
 if not os.path.exists(distDirectory):
     os.makedirs(distDirectory)#如果报error2 错误的话 自己建立一个新文件夹
-    
+
 
 for imageName in os.listdir(imagesDirectory):
     imagePath = os.path.join(imagesDirectory, imageName)
