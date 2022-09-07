@@ -1,5 +1,12 @@
-# -*- coding: UTF-8 -*-
+# -*- coding: utf-8 -*-
 
+"""
+Created on Tue Aug 30 09:36:50 2022.
+
+@author: Pengyu
+
+用来标准化栅格标签.
+"""
 from osgeo import ogr
 from osgeo import gdal
 import rasterio
@@ -7,7 +14,24 @@ import os
 
 
 def main(image, shapefile, label_file):
+    """
+    读shp file 变成 PNG格式的标记.
 
+    Parameters
+    ----------
+    image : TYPE
+        图片路径
+    shapefile : TYPE
+        标记路径
+    label_file : TYPE
+        PNG存储路径
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    """
     # making the shapefile as an object.
     input_shp = ogr.Open(shapefile)
 
@@ -21,7 +45,7 @@ def main(image, shapefile, label_file):
     # get extent values to set size of output raster.
     # x_min, x_max, y_min, y_max = shp_layer.GetExtent()
 
-    bounds = get_image_bonds(image)
+    bounds = get_image_bounds(image)
     x_min = -1 * bounds.left
     y_min = -1 * bounds.bottom
     x_max = bounds.right
@@ -56,16 +80,30 @@ def main(image, shapefile, label_file):
     return gdal.Open(output_raster)
 
 
-def get_image_bonds(image: str):
+def get_image_bounds(image: str):
+    """
+    Get the image bounds.
+
+    Parameters
+    ----------
+    image : str
+        DESCRIPTION.
+
+    Returns
+    -------
+    TYPE
+        DESCRIPTION.
+
+    """
     dataset = rasterio.open(os.path.abspath(image))
     print(dataset.bounds)
     return dataset.bounds
 
 
 if __name__ == '__main__':
-    input_path = r'C:\Desktop\水体\image'
-    shp_path = r'C:\Desktop\水体\shp'
-    label_path = r'C:\Desktop\水体\label'
+    input_path = r'/twork/pzhao/EMDO无人机图像标准化和图像增强工具/data/shp2png/img'
+    shp_path = r'/twork/pzhao/EMDO无人机图像标准化和图像增强工具/data/shp2png/shp'
+    label_path = r'/twork/pzhao/EMDO无人机图像标准化和图像增强工具/data/shp2png/'
 
     content = [f for f in os.listdir(input_path)
                if os.path.isfile(os.path.join(input_path, f))]

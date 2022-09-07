@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-
 from PIL import Image
 import piexif
 import os
@@ -48,12 +47,8 @@ def clearExif(path):
     input("\n照片信息处理完毕，按任意键退出...")
 
 if __name__ == "__main__":
-    print("欢迎使用EXIF信息清除程序！\n使用规则如下：")
-    print("1.可以将本程序放在图片目录下点开使用")
-    print("2.将照片目录手动输入\n")
-    # 获取当前程序所在的目录
-    nowDir = str(os.getcwd())
-    photoDir = input("C:\Desktop\水体\image") or nowDir
+
+    photoDir = input("/twork/pzhao/EMDO无人机图像标准化和图像增强工具/data/img_label/label") # 目标文件夹位置
     # 启动清除Exif信息函数
 
     clearExif(photoDir)
